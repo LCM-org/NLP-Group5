@@ -11,7 +11,6 @@ import pandas as pd
 import re
 
 # Load the dataset
-# Replace 'your_dataset.csv' with the actual path to your dataset
 df = pd.read_csv('measuring_hate_speech.csv')
 
 # Display the first few rows of the dataset
