@@ -1,3 +1,4 @@
+
 import pandas as pd
 import emoji
 
@@ -11,3 +12,4 @@ df = pd.read_csv('measuring_hate_speech.csv')
 df['text'] = df['text'].apply(remove_emojis)
 
 print(df['text'])
+
