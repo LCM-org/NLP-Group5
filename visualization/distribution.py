@@ -7,7 +7,6 @@ import seaborn as sns
 df = pd.read_csv('measuring_hate_speech.csv')
 
 
-
 text_data = " ".join(df['text'].astype(str))
 
 # Create a word cloud
