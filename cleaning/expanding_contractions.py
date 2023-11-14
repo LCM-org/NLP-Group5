@@ -1,13 +1,13 @@
 # Expanding Contractions 
 
 
-# importing necessary libraries 
+# Importing necessary libraries 
 
 import pandas as pd
 import contractions
 
 #Reading csv file 
-df = pd.read_csv(r"C:\Users\Owner\OneDrive\Documents\measuring_hate_speech.csv")
+df = pd.read_csv("measuring_hate_speech.csv")
 print(df.head())
 
 
