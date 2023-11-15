@@ -18,7 +18,7 @@ def plot_heatmap(df):
     return correlation_matrix
 
 # Reading csv file
-df = pd.read_csv(r"C:\Users\Owner\OneDrive\Documents\measuring_hate_speech.csv")
+df = pd.read_csv("measuring_hate_speech.csv")
 
 # Plot the heatmap for numerical columns and get the correlation matrix
 correlation_matrix = plot_heatmap(df)
