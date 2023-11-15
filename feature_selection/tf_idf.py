@@ -9,7 +9,6 @@ def tfidf(df):
     tfidf_vectorizer = TfidfVectorizer(max_features=5000)  
     tfidf_matrix = tfidf_vectorizer.fit_transform(df['text'])
     tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf_vectorizer.get_feature_names_out())
-    print("DataFrame with TF-IDF values:")
-    print(tfidf_df)
+    return(tfidf_df)
 
 tfidf(df)
