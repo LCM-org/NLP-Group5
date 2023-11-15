@@ -1,10 +1,11 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pandas as pd
+import pandas
+import logging
 
 class FeatureSelectDatasetOperator:
     def __init__(
-            self, file_path="", *args, **kwargs
+            self, cleaned_dataframe : pandas.DataFrame, *args, **kwargs
     ):
         """
         This class wraps all feature selection logic under one shade.
@@ -16,37 +17,7 @@ class FeatureSelectDatasetOperator:
 
         Added By : Sai Kumar Adulla
         """
-        self.file_path = file_path
-
-    def load_csv_to_dataset(self):
-        """
-        This method loads CSV dataset to pandas Dataframe
-        Returns:
-            df : pandas.DataFrame - dataset dataframe
-
-        Added By : Abbas Ismail
-        """
-        if len(self.file_path) > 0:
-            try:
-                text_df = pandas.read_csv(
-                    filepath_or_buffer=self.file_path
-                )
-            except Exception as ex:
-                raise Exception(
-                    f"Something went wrong while loading the dataset file to dataframe : {ex}"
-                )
-            n_features = text_df.columns
-            n_len = text_df.__len__()
-
-            logging.info(
-                f"...completed dataset loaded to dataframe, features : {n_features}, \n"
-                f" number of records : {n_len}"
-            )
-            
-        else:
-            raise Exception(
-                f"Path to csv dataset not provided"
-            )
+        self.dataset_df = cleaned_dataframe
 
     def create_bow_matrix(self, df : pandas.DataFrame, input_col='text', output_col='bow_features', max_features=5000):
         """
@@ -71,7 +42,7 @@ class FeatureSelectDatasetOperator:
 
         tfidf_matrix = tfidf_vectorizer.fit_transform(df['text'])
         
-        tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf_vectorizer.get_feature_names_out())
+        tfidf_df = pandas.DataFrame(tfidf_matrix.toarray(), columns=tfidf_vectorizer.get_feature_names_out())
         
         return tfidf_df
 
