@@ -27,7 +27,6 @@ class FeatureSelectDatasetOperator:
         """
         vectorizer = CountVectorizer(inputCol=input_col, outputCol=output_col, vocabSize=max_features)
 
-        
         bow_df = vectorizer.fit(df).transform(df)
 
         return bow_df
