@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 
 #Reading csv file 
-df = pd.read_csv(r"C:\Users\Owner\OneDrive\Documents\measuring_hate_speech.csv")
+df = pd.read_csv("measuring_hate_speech.csv")
 
 def create_bow_matrix(texts):
     # Create a CountVectorizer instance
