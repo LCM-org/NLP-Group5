@@ -36,7 +36,7 @@ class CleanTextDatasetOperator:
         try:
             text_df = pandas.read_csv(
                 filepath_or_buffer=self.file_path
-            )[['hatespeech', 'text']]
+            )[['hatespeech', 'text', "sentiment","respect","insult","humiliate","dehumanize","violence","genocide","attack_defend",]]
 
             n_features = text_df.columns
             n_len = text_df.__len__()
@@ -109,7 +109,6 @@ class CleanTextDatasetOperator:
 
         Added By : Christin Paul
         """
-        nltk.download()
         def _remove_words(text):
             words = word_tokenize(text)
             stop_words = set(stopwords.words('english'))
