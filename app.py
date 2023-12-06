@@ -57,3 +57,20 @@ def ValuePredictor(to_predict_list):
     print("Prediction : ", result[0])
     return result[0]
 
+# Remove stop words, special chars 
+# stem the word tokens
+# re.sub(r'^https?:\/\/.*[\r\n]*', '', text)
+def clean_tweet(sent):
+    stemmer = nltk.PorterStemmer()        
+    tknzr = nltk.RegexpTokenizer(r'[a-zA-Z0-9]+')
+
+    exclp = list(string.punctuation)     
+    exclc = [
+        "'re", "n't", "'m", "'s", "n't", "'s", 
+        "``", "''", "'ve", "'m", "'ll", "'ve", 
+        "...", "http", "https"]    
+    sw = set(stopwords.words("english") + exclp + exclc)    
+
+    tokens = tknzr.tokenize(sent.lower())
+    words = [stemmer.stem(token) for token in tokens if not token in sw]
+    return " ".join(words)
