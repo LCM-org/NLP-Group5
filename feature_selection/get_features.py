@@ -45,14 +45,16 @@ class FeatureSelectDatasetOperator:
         
         return tfidf_df
 
-    def feature_creation(dself, df : pandas.DataFrame):
+    def feature_creation(self, df : pandas.DataFrame):
         """
         Creatiing features
 
         Added By :  Sharon Victor
         """
         # 'Score' feature for 'hate_speech_score' column
-        df['Score'] = df['hate_speech_score'].astype(float)
+        df['Score'] = df['hatespeech'].astype(float)
 
          # 'Comments' feature for 'text' column
         df['Comments'] = df['text'].str.len()
+
+        return df
