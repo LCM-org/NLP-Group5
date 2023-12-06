@@ -33,15 +33,11 @@ class CleanTextDatasetOperator:
 
         Added By : Abbas Ismail
         """
-        if len(self.file_path) > 0:
-            try:
-                text_df = pandas.read_csv(
-                    filepath_or_buffer=self.file_path
-                )
-            except Exception as ex:
-                raise Exception(
-                    f"Something went wrong while loading the dataset file to dataframe : {ex}"
-                )
+        try:
+            text_df = pandas.read_csv(
+                filepath_or_buffer=self.file_path
+            )[["hatespeech", "text", "sentiment","respect","insult","humiliate","dehumanize","violence","genocide","attack_defend"]]
+
             n_features = text_df.columns
             n_len = text_df.__len__()
 
@@ -49,10 +45,10 @@ class CleanTextDatasetOperator:
                 f"...completed dataset loaded to dataframe, features : {n_features}, \n"
                 f" number of records : {n_len}"
             )
-            
-        else:
+            return text_df
+        except Exception as ex:
             raise Exception(
-                f"Path to csv dataset not provided"
+                f"Something went wrong while loading the dataset file to dataframe : {ex}"
             )
 
     def lowercase_text(self, df : pandas.DataFrame):
