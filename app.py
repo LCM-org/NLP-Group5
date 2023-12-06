@@ -32,3 +32,28 @@ from sklearn.naive_bayes import MultinomialNB
 import plotly.express as px
 import plotly.figure_factory as ff
 from yellowbrick.text import TSNEVisualizer
+
+app = Flask(__name__, template_folder='web')
+
+
+@app.route('/')
+def student():
+    return render_template("home.html")
+
+def processText(text):
+    # stemming
+    clean_text = clean_tweet(text)
+
+    # vectorization
+    vectorizer = joblib.load('model_vectorizer.sav')
+    vector_idf = vectorizer.transform([clean_text])
+
+    return vector_idf
+
+def ValuePredictor(to_predict_list):
+    processed_text = processText(to_predict_list[0])
+    loaded_model = joblib.load('finalized_model.sav')
+    result = loaded_model.predict(processed_text)
+    print("Prediction : ", result[0])
+    return result[0]
+
