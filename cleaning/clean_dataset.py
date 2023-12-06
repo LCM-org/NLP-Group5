@@ -36,7 +36,7 @@ class CleanTextDatasetOperator:
         try:
             text_df = pandas.read_csv(
                 filepath_or_buffer=self.file_path
-            )[['hatespeech', 'text']]
+            )[["hatespeech", "text", "sentiment","respect","insult","humiliate","dehumanize","violence","genocide","attack_defend"]]
 
             n_features = text_df.columns
             n_len = text_df.__len__()
@@ -50,7 +50,6 @@ class CleanTextDatasetOperator:
             raise Exception(
                 f"Something went wrong while loading the dataset file to dataframe : {ex}"
             )
-            
 
     def lowercase_text(self, df : pandas.DataFrame):
         """
@@ -100,7 +99,7 @@ class CleanTextDatasetOperator:
             clean = re.compile('<.*?>')
             return re.sub(clean, '', text)
 
-        df['text'] = df['text'].apply(lambda x : remove_html_tags(x))
+        df['text'] = df['text'].apply(remove_html_tags)
         return df
     
     def remove_stopwords(self, df : pandas.DataFrame):
@@ -109,7 +108,6 @@ class CleanTextDatasetOperator:
 
         Added By : Christin Paul
         """
-        nltk.download()
         def _remove_words(text):
             words = word_tokenize(text)
             stop_words = set(stopwords.words('english'))
