@@ -74,3 +74,20 @@ def clean_tweet(sent):
     tokens = tknzr.tokenize(sent.lower())
     words = [stemmer.stem(token) for token in tokens if not token in sw]
     return " ".join(words)
+
+@app.route('/', methods=['POST', 'GET'])
+def result():
+    if request.method == 'POST':
+        to_predict_list = request.form.to_dict()
+        to_predict_list = list(to_predict_list.values())
+        result = round(float(ValuePredictor(to_predict_list)), 2)
+        if result == 0:
+            result = "Niether, All Good Bhai :)"
+        if result == 1:
+            result = "Offensive"
+        if result == 2:
+            result = "Hateful"
+        return render_template("home.html", result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
