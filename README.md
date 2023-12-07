@@ -54,3 +54,8 @@ Thanks to the following contributors who have played a role in developing this p
 |  Navneet  | NLP Developer       |
 | Simranjeet   | NLP Developer     |
 | Sharon Victor    | NLP Developer   |
+
+
+
+### Dataset
+Hate Speech Dataset : https://www.kaggle.com/datasets/andre112/measuring-hate-speech/data
